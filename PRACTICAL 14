@@ -1,0 +1,61 @@
+class BankAccount {
+    protected String accountNumber;
+    protected String accountHolderName;
+    protected double balance;
+    public void openAccount(String accountNumber, String accountHolderName, double initialDeposit) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = initialDeposit;
+
+        System.out.println("Account opened successfully for " + accountHolderName);
+    }
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println(amount + " deposited successfully.");
+        }
+    }
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println(amount + " withdrawn successfully.");
+        } else {
+            System.out.println("Insufficient balance or invalid amount.");
+        }
+    }
+    public void checkBalance() {
+        System.out.println("Account Holder: " + accountHolderName);
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Current Balance: " + balance);
+    }
+}
+class SavingAccount extends BankAccount {
+    private double interestRate = 0.04; // 4%
+
+    public double calculateInterest() {
+        return balance * interestRate;
+    }
+}
+class FixedDepositAccount extends BankAccount {
+    private double interestRate = 0.06; // 6%
+    private int years = 5;
+
+    public double maturityAmount() {
+        return balance + (balance * interestRate * years);
+    }
+}
+public class BankTest {
+    public static void main(String[] args) {
+        SavingAccount sa = new SavingAccount();
+        sa.openAccount("SAV123", "Alice", 1000);
+        sa.deposit(500);
+        sa.checkBalance();
+        System.out.println("Interest Earned: " + sa.calculateInterest());
+
+        System.out.println("\n-----------------------\n");
+        FixedDepositAccount fd = new FixedDepositAccount();
+        fd.openAccount("FD456", "Bob", 5000);
+        fd.checkBalance();
+        System.out.println("Maturity Amount: " + fd.maturityAmount());
+    }
+}
