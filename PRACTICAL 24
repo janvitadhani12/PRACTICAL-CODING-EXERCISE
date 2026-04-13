@@ -1,0 +1,40 @@
+class NumberThread extends Thread {
+    private int start;
+    private int end;
+    private String name;
+
+    public NumberThread(int start, int end, String name) {
+        this.start = start;
+        this.end = end;
+        this.name = name;
+    }
+
+    public void run() {
+        for (int i = start; i <= end; i++) {
+            System.out.println(name + ": " + i);
+        }
+    }
+}
+
+public class SequentialThreads {
+    public static void main(String[] args) {
+
+        NumberThread t1 = new NumberThread(1, 100, "T1");
+        NumberThread t2 = new NumberThread(101, 200, "T2");
+        NumberThread t3 = new NumberThread(201, 300, "T3");
+
+        try {
+            t1.start();
+            t1.join();  
+
+            t2.start();
+            t2.join();
+
+            t3.start();
+            t3.join();   
+
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
