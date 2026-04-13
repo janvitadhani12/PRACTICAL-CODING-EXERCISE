@@ -1,0 +1,27 @@
+import java.util.LinkedList;
+
+public class GenericSearch {
+    public static <T> boolean searchElement(LinkedList<T> list, T element) {
+        return list.contains(element);
+    }
+
+    public static void main(String[] args) {
+        LinkedList<Integer> rollNumbers = new LinkedList<>();
+        rollNumbers.add(101);
+        rollNumbers.add(102);
+        rollNumbers.add(103);
+        rollNumbers.add(104);
+
+        System.out.println("Searching in Roll Numbers:");
+        System.out.println("103 found? " + searchElement(rollNumbers, 103));
+        System.out.println("110 found? " + searchElement(rollNumbers, 110));
+        LinkedList<String> names = new LinkedList<>();
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+
+        System.out.println("\nSearching in Names:");
+        System.out.println("Bob found? " + searchElement(names, "Bob"));
+        System.out.println("David found? " + searchElement(names, "David"));
+    }
+}
